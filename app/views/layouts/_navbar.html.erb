@@ -1,0 +1,18 @@
+<script src="https://cdn.auth0.com/js/lock-8.2.min.js"></script>
+<script type="text/javascript">
+  
+  var lock = new Auth0Lock("<%= ENV['auth0_key'] %>", "<%= ENV['auth0_domain'] %>");
+  
+  
+  function signin() {
+    lock.show({
+        callbackURL: "<%= ENV['app_url'] %>/auth/auth0/callback"
+      , responseType: 'code'
+      , authParams: {
+        scope: 'openid profile'
+      }
+    });
+  }
+</script>
+<button onclick="window.signin();">Login</button>
+<p><%= current_user[:info][:email] if signed_in? %></p>

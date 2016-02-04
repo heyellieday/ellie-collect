@@ -1,0 +1,54 @@
+app.controller('CollectionCtrl', [
+	'$scope',
+	'$rootScope',
+	'$http', 
+	'$location',
+	'$timeout',
+	'$filter',
+	'Schema',
+	'Collection',
+	'Item',
+	'DataStore',
+function (
+	$scope,
+	$rootScope,
+	$http,
+	$location,
+	$timeout,
+	$filter,
+	Schema,
+	Collection,
+	Item,
+	DataStore
+){
+
+$scope.collection =  Collection.find({id: 1})
+
+$scope.updateItem = function(item){
+	Item.update(item);
+}
+
+$scope.addItem = function(newUrl){
+	$scope.getUrlDetailsForItem(newUrl);
+}
+
+$scope.deleteItem = function(item){
+	Item.delete(item);
+	delete $scope.collection.items[item.localId];
+}
+
+$scope.getUrlDetailsForItem = function(url){
+	$http.get("http://iframe.ly/api/iframely?url=" + url + "&api_key=<%= ENV['iframely_api_key'] %>").success(function(data){
+		var attributes = {};
+		attributes.title = data.meta.title;
+		attributes.description = data.meta.description;
+		attributes.image_source = data.links.thumbnail.href;
+		attributes.url = data.url;
+		item = Item.create({parentLocalId: $scope.collection.localId, attributes: attributes});
+		$scope.getUrlDetailsForItem(newUrl, item);
+		$scope.collection.items[item.localId] = item;
+	})
+	
+}
+
+}]);

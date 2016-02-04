@@ -1,0 +1,10 @@
+<article ng-controller="CollectionCtrl">
+	<h1>{{collection.attributes.title}}</h1>
+	<input type="text" ng-model="newUrl">
+	<button ng-click="addItem(newUrl)">Add Link</button>
+	<section ng-repeat="item in collection.items">
+		<h2 contenteditable ng-model="item.attributes.title" ng-change="updateItem(item)"></h2>
+		<a href="{{item.attributes.url}}" contenteditable ng-model="item.attributes.url"></a>
+		<button ng-click="deleteItem(item)">Delete</button>
+	</section>
+</article>

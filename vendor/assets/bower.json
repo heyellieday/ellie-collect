@@ -1,0 +1,16 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "bootstrap": "latest",
+    "angular": "latest",
+    "es5-shim": "latest",
+    "angular-resource": "latest",
+    "underscore": "latest",
+    "fontawesome": "latest",
+    "less": "latest",
+    "angular-order-object-by": "latest",
+    "keen-js": "latest",
+    "angular-bootstrap": "latest",
+    "timeme.js": "latest"
+  }
+}
