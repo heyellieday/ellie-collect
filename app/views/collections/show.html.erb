@@ -3,8 +3,10 @@
 	<input type="text" ng-model="newUrl">
 	<button ng-click="addItem(newUrl)">Add Link</button>
 	<section ng-repeat="item in collection.items">
+		<img ng-if="item.attributes.image_source != null" src="{{item.attributes.image_source}}">
 		<h2 contenteditable ng-model="item.attributes.title" ng-change="updateItem(item)"></h2>
 		<a href="{{item.attributes.url}}" contenteditable ng-model="item.attributes.url"></a>
+		<p contenteditable ng-model="item.attributes.description"></p>
 		<button ng-click="deleteItem(item)">Delete</button>
 	</section>
 </article>

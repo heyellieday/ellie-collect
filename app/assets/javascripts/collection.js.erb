@@ -42,10 +42,9 @@ $scope.getUrlDetailsForItem = function(url){
 		var attributes = {};
 		attributes.title = data.meta.title;
 		attributes.description = data.meta.description;
-		attributes.image_source = data.links.thumbnail.href;
+		attributes.image_source = data.links.thumbnail[0].href;
 		attributes.url = data.url;
 		item = Item.create({parentLocalId: $scope.collection.localId, attributes: attributes});
-		$scope.getUrlDetailsForItem(newUrl, item);
 		$scope.collection.items[item.localId] = item;
 	})
 	
