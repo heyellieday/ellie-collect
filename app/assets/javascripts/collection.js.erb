@@ -22,7 +22,9 @@ function (
 	DataStore
 ){
 
-$scope.collection =  Collection.find({id: 1})
+$scope.collection =  Collection.find({id: 1});
+
+$scope.editMode = false;
 
 $scope.updateItem = function(item){
 	Item.update(item);

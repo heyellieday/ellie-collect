@@ -15,12 +15,26 @@ app.directive("contenteditable", function() {
       };
 
       element.bind("blur keyup change", function() {
-        scope.$apply(read);
+      		scope.$apply(read);
       });
     }
   };
 });
 
+app.run(['$rootScope', '$sce', function($rootScope, $sce){
+
+
+  $rootScope.currentUser = window.currentUser;
+
+  $rootScope.signedIn = function(){
+  	return $rootScope.currentUser != null;
+  };
+
+  $rootScope.userCanAccess = function(object){
+  	return (object.attributes != null && object.attributes.uid != null && $rootScope.signedIn && object.attributes.uid != null && object.attributes.uid == $rootScope.currentUser.uid);
+  };
+
+}]);
 
 app.config(['$httpProvider', function($httpProvider) {
   //$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');

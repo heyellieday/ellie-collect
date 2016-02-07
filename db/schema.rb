@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204073455) do
+ActiveRecord::Schema.define(version: 20160207210714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,10 @@ ActiveRecord::Schema.define(version: 20160204073455) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug"
+    t.string   "uid"
   end
+
+  add_index "collections", ["uid"], name: "index_collections_on_uid", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.text     "url"
@@ -34,9 +37,11 @@ ActiveRecord::Schema.define(version: 20160204073455) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "collection_id"
+    t.string   "uid"
   end
 
   add_index "items", ["collection_id"], name: "index_items_on_collection_id", using: :btree
+  add_index "items", ["uid"], name: "index_items_on_uid", using: :btree
 
   add_foreign_key "items", "collections"
 end

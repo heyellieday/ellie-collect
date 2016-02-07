@@ -13,6 +13,13 @@
       }
     });
   }
+<% if signed_in? %>
+  window.currentUser = JSON.parse("<%= escape_javascript("#{current_user.to_json}".html_safe) %>")
+<% end %>
+
 </script>
+<% if !signed_in? %>
 <button onclick="window.signin();">Login</button>
+<% end %>
+
 <p><%= current_user[:info][:email] if signed_in? %></p>
